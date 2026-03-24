@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Peticiones de Oración</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      text-align: center;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      margin: 50px auto;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px gray;
+    }
+    input, textarea {
+      width: 90%;
+      margin: 10px;
+      padding: 10px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    h1 {
+      color: #333;
+    }
+    .mensaje {
+      margin-top: 20px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🙏 Peticiones de Oración</h1>
+
+    <p>Escribe tu petición y estaremos orando por ti.</p>
+
+    <form id="form">
+      <input type="text" placeholder="Tu nombre" id="nombre" required>
+      <textarea placeholder="Escribe tu petición..." id="mensaje" required></textarea>
+      <button type="submit">Enviar petición</button>
+    </form>
+
+    <div class="mensaje">
+      "Dios es nuestra fortaleza y pronto auxilio en las tribulaciones"
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value;
+      const mensaje = document.getElementById("mensaje").value;
+
+      await fetch("http://localhost:3000/enviar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ nombre, mensaje })
+      });
+
+      alert("Petición enviada 🙏");
+    });
+  </script>
+
+</body>
+</html>
